@@ -29,6 +29,7 @@ Apache-php-mysql-modsecurity-docker-container
             |- opcache.ini
             |- php.ini
             |- www.conf
+        |- Dockerfile
     |- .env
     |- build.sh
     |- destroy.sh
