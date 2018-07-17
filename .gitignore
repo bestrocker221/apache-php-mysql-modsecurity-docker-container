@@ -1,0 +1,5 @@
+database/
+logs/apache/*
+logs/mysql
+logs/php
+public_html/*
