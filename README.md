@@ -8,6 +8,42 @@ This project make use of `docker-compose` to build three containers:
 
 The only container exposed is the Apache container on port 80.
 
+Project structure:
+```
+Apache-php-mysql-modsecurity-docker-container
+|
+|- database
+    |- data..
+    |- ..
+|- docker
+    |- apache
+        |- config
+            |- 000-default.conf
+            |- httpd.conf
+        |- Dockerfile
+    |- mysql
+        |- Dockerfile
+    |- php
+        |- config
+            |- apcu.ini
+            |- opcache.ini
+            |- php.ini
+            |- www.conf
+    |- .env
+    |- build.sh
+    |- destroy.sh
+    |- docker-compose.yml
+    |- run-sh
+|- logs
+    |- apache
+        |- ...
+    |- mysql
+        |- ...
+    |- php
+        |- ...
+|- public_html
+```
+
 ## Some notes
 - PHP is configured with APCu and OPCACHE. It also contains the modules needed for Prestashop and e-commerce websites.
 - Apache has ModSecurity Web Application Firewall v3 installed and working with the latest OWASP Rule Core Set.
@@ -24,6 +60,7 @@ First `git clone https://github.com/bestrocker221/apache-php-mysql-modsecurity-d
 2. (optional) Set your preferred website settings in apache/config/000-default.conf.
 3. (optional) Set your preferred settings in php/config otherwise leave them intact.
 4. Choose to use an existing db and then copy the data to the ./database folder, otherwise just let the build create another one.
+5. Copy your WEB PROJECT into `public_html`
 
 Then
 ```
