@@ -16,7 +16,7 @@ services:
             - "/etc/localtime:/etc/localtime:ro"
         ports:
             - ${APACHE_EXPOSED_PORT}:80
-        links:
+        depends_on:
             - mysql_img
             - php_img
         networks:
