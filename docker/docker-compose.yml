@@ -20,6 +20,8 @@ services:
             - mysql_img
             - php_img
         networks:
+            private_net:
+                ipv4_address: ${APACHE_PRIVATE_IP}
             public_net:
                 ipv4_address: ${APACHE_IP}
         environment:
@@ -44,8 +46,8 @@ services:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
         networks:
-            public_net:
-                ipv4_address: ${MYSQL_IP}
+            private_net:
+                ipv4_address: ${MYSQL_PRIVATE_IP}
         environment:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
@@ -70,6 +72,8 @@ services:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
         networks:
+            private_net:
+                ipv4_address: ${PHP_PRIVATE_IP}
             public_net:
                 ipv4_address: ${PHP_IP}
         environment:
@@ -92,3 +96,10 @@ networks:
             driver: default
             config:
                 - subnet: ${NETWORK_SUBNET}
+    private_net:
+        driver: bridge
+        internal: true
+        ipam:
+            driver: default
+            config:
+                - subnet: ${PRIVATE_NETWORK_SUBNET}
